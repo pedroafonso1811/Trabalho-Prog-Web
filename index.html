@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trabalho Prog Web</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"> </script>
+    <script>
+        $(document).ready(function() {
+            $("btEnviar").click(function() {
+                $.ajax({
+                    type: "POST",
+                    url: "backend.php",
+                    data: {nome: $("#txtNome").val() },
+                    success: function(resposta) {
+                        $("#resultado").html(resposta);
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Requisição AJAX</h1>
+    <p>Digite seu nome:</p>
+    <input type="text" id="txtNome">
+    <button id="btEnviar">Enviar</button>
+    <div id="resultado"></div>
+</body>
+</html>
