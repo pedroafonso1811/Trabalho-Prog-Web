@@ -12,7 +12,27 @@
                     url: "backend.php",
                     data: {nome: $("#txtNome").val() },
                     success: function(resposta) {
-                        $("#resultado").html(resposta);
+                        // Converte a resposta em um objeto JavaScript
+                        var dados = JSON.parse(resposta);
+
+                        // Cria uma tabela com os dados recebidos
+                        var tabela = $("<table>");
+                        var cabecalho = $("<tr>");
+                        cabecalho.append($("<th>").text("Nome"));
+                        cabecalho.append($("<th>").text("Idade"));
+                        cabecalho.append($("<th>").text("Cidade"));
+                        tabela.append(cabecalho);
+
+                        for (var i=0; i<dados.length; i++) {
+                            var linha = $("<tr>");
+                            linha.append($("<td>").text(dados[i].nome));
+                            linha.append($("<td>").text(dados[i].idade));
+                            linha.append($("<td>").text(dados[i].cidade));
+                            tabela.append(linha);                            
+                        }
+
+                        // Adiciona a tabela na página
+                        $("#resultado").html(tabela);
                     }
                 });
             });
